@@ -127,6 +127,7 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
             R.styleable.AutoBanner_banner_indicator_background,
             0
         )
+        autoPlay = typeArray.getBoolean(R.styleable.AutoBanner_banner_is_auto_scroll, true);
         intervalTime = typeArray.getInt(R.styleable.AutoBanner_banner_interval_time, 1000);
         scrollTime = typeArray.getInt(R.styleable.AutoBanner_banner_scroll_time, 1000);
         typeArray.recycle();

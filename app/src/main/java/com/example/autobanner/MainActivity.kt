@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         array.add("https://b-ssl.duitang.com/uploads/item/201610/02/20161002145901_wAMaz.jpeg")
 
         bannerLinear = findViewById(R.id.bannerLinear);
-        bannerLinear!!.autoPlay = true;
         bannerLinear!!.setIImageLoader(object : AutoBanner.IImageLoader {
             override fun disPlayImage(context: Context, imageView: ImageView, url: String) {
                 ImageLoader.loadImage(context, imageView, url);
@@ -46,7 +45,6 @@ class MainActivity : AppCompatActivity() {
 
         bannerFrame = findViewById(R.id.bannerFrame);
         bannerFrame!!.autoPlay = false;
-        bannerFrame!!.gravity = AutoBannerConfig.START
         bannerFrame!!.setIImageLoader(object : AutoBanner.IImageLoader {
             override fun disPlayImage(context: Context, imageView: ImageView, url: String) {
                 ImageLoader.loadImage(context, imageView, url);
