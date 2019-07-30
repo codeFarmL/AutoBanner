@@ -52,23 +52,6 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
     var scrollTime: Int = 0; //自动滑动的切换时间
     var mVpScroll: AutoBannerScroller? = null;
     var gravity: Int = AutoBannerConfig.CENTER;
-    fun setIImageLoader(imageLoader: IImageLoader) {
-        this.imageLoader = imageLoader;
-    }
-
-    fun setIsScroll(isScroll: Boolean) {
-        this.isScroll = isScroll;
-    }
-
-    //设置指示点的背景
-    fun setIndicatorBackgroundId(indicatorBackground: Int) {
-        this.indicatorBackground = indicatorBackground;
-    }
-
-    //设置指示点的位置
-    fun setIndicatorGravity(gravity: Int) {
-        this.gravity = gravity;
-    }
 
     constructor(context: Context) : this(context, null) {}
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)

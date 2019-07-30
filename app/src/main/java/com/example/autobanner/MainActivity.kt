@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         array.add("https://b-ssl.duitang.com/uploads/item/201610/02/20161002145901_wAMaz.jpeg")
 
         bannerLinear = findViewById(R.id.bannerLinear);
-        bannerLinear!!.setIImageLoader(object : AutoBanner.IImageLoader {
+        bannerLinear!!.imageLoader = (object : AutoBanner.IImageLoader {
             override fun disPlayImage(context: Context, imageView: ImageView, url: String) {
                 ImageLoader.loadImage(context, imageView, url);
                 //imageView.setImageResource(R.mipmap.ic_launcher)
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         bannerFrame = findViewById(R.id.bannerFrame);
         bannerFrame!!.autoPlay = false;
-        bannerFrame!!.setIImageLoader(object : AutoBanner.IImageLoader {
+        bannerFrame!!.imageLoader = (object : AutoBanner.IImageLoader {
             override fun disPlayImage(context: Context, imageView: ImageView, url: String) {
                 ImageLoader.loadImage(context, imageView, url);
                 //imageView.setImageResource(R.mipmap.ic_launcher)
@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         bannerFrameDefault = findViewById(R.id.bannerFrame_indicatorDefault)
         bannerFrameDefault!!.autoPlay = true;
-        bannerFrameDefault!!.setIImageLoader(object : AutoBanner.IImageLoader {
+        bannerFrameDefault!!.imageLoader = (object : AutoBanner.IImageLoader {
             override fun disPlayImage(context: Context, imageView: ImageView, url: String) {
                 ImageLoader.loadImage(context, imageView, url);
                 //imageView.setImageResource(R.mipmap.ic_launcher)
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity() {
         array.add("https://b-ssl.duitang.com/uploads/item/201505/01/20150501010111_2BrKP.jpeg")
         bannerFrameOnlyOnePic = findViewById(R.id.bannerFrame_one_pic)
         bannerFrameOnlyOnePic!!.autoPlay = false;
-        bannerFrameOnlyOnePic!!.setIImageLoader(object : AutoBanner.IImageLoader {
+        bannerFrameOnlyOnePic!!.imageLoader = (object : AutoBanner.IImageLoader {
             override fun disPlayImage(context: Context, imageView: ImageView, url: String) {
                 ImageLoader.loadImage(context, imageView, url);
                 //imageView.setImageResource(R.mipmap.ic_launcher)
