@@ -88,6 +88,13 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
         />
         
      2，代码中调用
+     
+        val array = ArrayList<String>()
+        array.add("https://b-ssl.duitang.com/uploads/item/201505/01/20150501010111_2BrKP.jpeg")
+        array.add("https://b-ssl.duitang.com/uploads/item/201412/02/20141202213236_NGdxu.jpeg")
+        array.add("https://b-ssl.duitang.com/uploads/item/201410/29/20141029153633_GGTV3.jpeg")
+        array.add("https://b-ssl.duitang.com/uploads/item/201610/02/20161002145901_wAMaz.jpeg")
+
         bannerFrame = findViewById(R.id.bannerFrame);
         bannerFrame!!.autoPlay = true；
         bannerFrame!!.setIImageLoader(object : AutoBanner.IImageLoader {
