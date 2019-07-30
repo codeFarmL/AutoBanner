@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AutoBanner">
+        <attr name="banner_width" format="dimension"/>
+        <attr name="banner_height" format="dimension"/>
+        <attr name="banner_indicator_height" format="dimension"/>
+        <attr name="banner_indicator_width" format="dimension"/>
+        <attr name="banner_indicator_space" format="dimension"/>
+        <attr name="banner_indicator_start_margin" format="dimension"/>
+        <attr name="banner_indicator_end_margin" format="dimension"/>
+        <attr name="banner_indicator_bottom" format="dimension"/>
+        <attr name="banner_indicator_top" format="dimension"/>
+        <attr name="banner_indicator_background" format="reference"/>
+        <attr name="banner_indicator_select_bg" format="reference"/>
+        <attr name="banner_indicator_unSelect_bg" format="reference"/>
+        <attr name="banner_is_auto_scroll" format="boolean"/>
+        <attr name="banner_is_frameLayout" format="boolean"/>
+        <attr name="banner_interval_time" format="integer"/>
+        <attr name="banner_scroll_time" format="integer"/>
+    </declare-styleable>
+
+</resources>
