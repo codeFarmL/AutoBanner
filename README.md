@@ -37,6 +37,7 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
 二： AutoBanner的使用：
     1，布局中的使用
     （1），线性布局的使用：
+    
     <com.example.banner.AutoBanner
                 android:id="@+id/bannerLinear"
                 android:layout_width="match_parent"
