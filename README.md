@@ -43,7 +43,7 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
 	}
         
         dependencies {
-	        implementation 'com.github.codeFarmL:AutoBanner:Tag'
+	        implementation 'com.github.codeFarmL:AutoBanner:1.0.0'
 	}
         
         
