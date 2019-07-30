@@ -96,7 +96,7 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
             UIUtils.dip2px(mContext, 3.5f)
         );
 
-        bannerIsFrameLayout = typeArray.getBoolean(R.styleable.AutoBanner_banner_is_frameLayout, false);
+        bannerIsFrameLayout = typeArray.getBoolean(R.styleable.AutoBanner_banner_is_frameLayout, true);
         indicatorSelect = typeArray.getResourceId(
             R.styleable.AutoBanner_banner_indicator_select_bg,
             R.drawable.bg_banner_select_indicator

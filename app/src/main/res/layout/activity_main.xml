@@ -45,7 +45,6 @@
         <com.example.banner.AutoBanner
                 android:id="@+id/bannerFrame_indicatorDefault"
                 android:layout_width="match_parent"
-                app:banner_height="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="30dp"
 
