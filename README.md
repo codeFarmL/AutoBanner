@@ -33,8 +33,21 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
         <attr name="banner_interval_time" format="integer"/> //自动轮播的停留时间
         
         <attr name="banner_scroll_time" format="integer"/> //自动轮播的滑动时间
+二：依赖导入：
 
-二： AutoBanner的使用：
+        allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+        
+        dependencies {
+	        implementation 'com.github.codeFarmL:AutoBanner:Tag'
+	}
+        
+        
+三： AutoBanner的使用：
     1，布局中的使用
     （1），线性布局的使用：
     
