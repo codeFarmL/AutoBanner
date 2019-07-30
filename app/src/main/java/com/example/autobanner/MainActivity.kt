@@ -6,8 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import com.example.banner.AutoBanner
-import com.example.banner.AutoBannerConfig
-import com.example.banner.ImageLoader
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {

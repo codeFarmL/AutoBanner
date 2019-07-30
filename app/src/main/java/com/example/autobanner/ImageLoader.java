@@ -1,4 +1,4 @@
-package com.example.banner;
+package com.example.autobanner;
 
 import android.content.Context;
 import android.widget.ImageView;
