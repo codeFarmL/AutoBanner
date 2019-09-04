@@ -1,7 +1,16 @@
 # AutoBanner
-AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。支持单图和多图，支持指示点的位置变化，包括和轮播图同等级也可以在轮播图的下面，在轮播图的左面，中间，右面，支持指示点设置背景，支持指示点设置上下左右margin，支持设置自动轮播的停留时间，支持设置自动轮播的scroll时间等等·。
 
+
+
+
+
+![image](https://github.com/codeFarmL/AutoBanner/blob/master/banner.jpg?raw=true)
+
+
+
+AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。支持单图和多图，支持指示点的位置变化，包括和轮播图同等级也可以在轮播图的下面，在轮播图的左面，中间，右面，支持指示点设置背景，支持指示点设置上下左右margin，支持设置自动轮播的停留时间，支持设置自动轮播的scroll时间等等·。
 一： 自定义属性
+
         <attr name="banner_width" format="dimension"/> 轮播图的宽度
       
         <attr name="banner_height" format="dimension"/> 轮播图的高度
@@ -43,14 +52,23 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
 	}
         
         dependencies {
-	        implementation 'com.github.codeFarmL:AutoBanner:1.0.0'
+	        implementation 'com.github.codeFarmL:AutoBanner:1.0.1'
 	}
         
         
 三： AutoBanner的使用：
-    1，布局中的使用
-    （1），线性布局的使用：
+    1，布局中的使用：
     
+     （1），默认使用
+     <com.example.banner.AutoBanner
+                android:id="@+id/bannerFrame_indicatorDefault"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="30dp"
+
+        />
+    
+    （2），线性布局的使用：
     <com.example.banner.AutoBanner
                 android:id="@+id/bannerLinear"
                 android:layout_width="match_parent"
@@ -65,7 +83,7 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
                 app:banner_indicator_unSelect_bg="@drawable/bg_banner_unselect_indicator"
                 android:layout_marginBottom="10dp"/>
         
-    （2），帧布局的使用：
+    （3），帧布局的使用：
     <com.example.banner.AutoBanner
                 android:id="@+id/bannerFrame"
                 android:layout_width="match_parent"
@@ -80,17 +98,7 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
                 app:banner_indicator_select_bg="@drawable/bg_banner_select_indicator"
                 app:banner_indicator_unSelect_bg="@drawable/bg_banner_unselect_indicator"
         />
-        
-     （3），默认使用
-     <com.example.banner.AutoBanner
-                android:id="@+id/bannerFrame_indicatorDefault"
-                android:layout_width="match_parent"
-                app:banner_height="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="30dp"
-
-        />
-     
+      
      （4），处理单图的banner
       <com.example.banner.AutoBanner
                 android:id="@+id/bannerFrame_one_pic"
@@ -122,6 +130,8 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
               //imageView点击监听。
             }
         }
+	
+	//设置数据源。
         bannerFrame!!.setImageUrls(array)
         
 
