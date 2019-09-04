@@ -4,7 +4,7 @@
 
 
 
-![image](https://github.com/codeFarmL/AutoBanner/blob/master/banner.jpg?raw=true)
+![image](https://github.com/codeFarmL/AutoBanner/blob/codeFarmL-patch-1/banner.jpg?raw=true)
 ![image](https://github.com/codeFarmL/AutoBanner/blob/codeFarmL-patch-1/banner2.jpg?raw=true)
 
 
