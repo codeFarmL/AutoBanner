@@ -9,6 +9,7 @@
 
 
 AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。支持单图和多图，支持指示点的位置变化，包括和轮播图同等级也可以在轮播图的下面，在轮播图的左面，中间，右面，支持指示点设置背景，支持指示点设置上下左右margin，支持设置自动轮播的停留时间，支持设置自动轮播的scroll时间等等·。
+
 一： 自定义属性
 
 	1.0.1版本：
@@ -45,9 +46,11 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
         <attr name="banner_scroll_time" format="integer"/> //自动轮播的滑动时间
 	
 	
-	1.0.2版本：
+	1.0.2版本： 新增clipChildren功能，可以自定义transformer及一屏显示多页面效果
+	
         新增属性  
 	<attr name="banner_clipChildren" format="boolean"/>  //是否clipChildren
+	
         <attr name="banner_clipChildren_margin" format="dimension"/> //是否clipChildren_margin
 二：依赖导入：
 
