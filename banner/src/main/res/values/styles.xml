@@ -17,6 +17,9 @@
         <attr name="banner_is_frameLayout" format="boolean"/>
         <attr name="banner_interval_time" format="integer"/>
         <attr name="banner_scroll_time" format="integer"/>
+
+        <attr name="banner_clipChildren" format="boolean"/>
+        <attr name="banner_clipChildren_margin" format="dimension"/>
     </declare-styleable>
 
 </resources>

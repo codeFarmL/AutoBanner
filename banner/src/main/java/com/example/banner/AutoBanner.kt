@@ -15,6 +15,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
+import android.view.ViewGroup
+import com.example.banner.transformer.DefaultTransformer
+
 
 class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
 
@@ -28,8 +31,10 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
     var myPageAdapter: MyPageAdapter? = null;
     var autoPlay: Boolean = false;
     var isScroll: Boolean = true;
+    var isLimitless: Boolean = true; //是否是无界限的
     var imageLoader: IImageLoader? = null;
-    var imageClick: IImageClick? = null;
+    var viewLoader: IViewLoader? = null
+    var viewClick: IViewClick? = null;
     var size: Int = 0;
     var currentItem: Int = 0;
 
@@ -52,6 +57,11 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
     var scrollTime: Int = 0; //自动滑动的切换时间
     var mVpScroll: AutoBannerScroller? = null;
     var gravity: Int = AutoBannerConfig.CENTER;
+
+    var isSetClipChildren = true;
+    var clipChildrenMargin = 0;
+
+    var transformer: ViewPager.PageTransformer = DefaultTransformer();
 
     constructor(context: Context) : this(context, null) {}
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -110,6 +120,12 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
             R.styleable.AutoBanner_banner_indicator_background,
             0
         )
+
+        isSetClipChildren = typeArray.getBoolean(R.styleable.AutoBanner_banner_clipChildren, true);
+        clipChildrenMargin = typeArray.getDimensionPixelSize(
+            R.styleable.AutoBanner_banner_clipChildren_margin,
+            UIUtils.dip2px(mContext, 0f)
+        )
         autoPlay = typeArray.getBoolean(R.styleable.AutoBanner_banner_is_auto_scroll, true);
         intervalTime = typeArray.getInt(R.styleable.AutoBanner_banner_interval_time, 1000);
         scrollTime = typeArray.getInt(R.styleable.AutoBanner_banner_scroll_time, 1000);
@@ -122,6 +138,25 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
         viewPager = view.findViewById(R.id.vp);
         mLLIndicator = view.findViewById(R.id.indicator);
         viewPager!!.addOnPageChangeListener(this)
+        if (!isSetClipChildren) {
+            var fl = view.findViewById<FrameLayout>(R.id.fl)
+            viewPager!!.clipChildren = false;
+            fl!!.clipChildren = false;
+            viewPager!!.post(object : Runnable {
+                override fun run() {
+                    var vpLayoutParams: LayoutParams = viewPager!!.layoutParams as LayoutParams;
+                    vpLayoutParams.setMargins(
+                        clipChildrenMargin,
+                        0,
+                        clipChildrenMargin,
+                        0
+                    )
+                    viewPager!!.setLayoutParams(vpLayoutParams);
+                }
+
+            })
+        }
+
 
         setViewPagerScroll();
 
@@ -156,39 +191,97 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
 
     }
 
-    fun setImageUrls(imgUrls: ArrayList<String>) {
+    fun setCustomView(viewUrls: ArrayList<View>) {
         mImgViews.clear();
-        size = imgUrls.size;
-        if (size > 1) {
-            currentItem = 1;
-        } else {
-            currentItem == 0;
-        }
+        size = viewUrls.size;
+        initCurrentItem()
         createIndicatorImages();
         setIndicatorLocation();
-
-        for (i in 0..size + 1) {
-            val imgeView = ImageView(mContext);
-            imgeView.scaleType = ImageView.ScaleType.CENTER_CROP;
-            if (imageClick != null) {
-                imgeView.setOnClickListener { imageClick!!.imageClick(i) }
+        if (isLimitless) {
+            lastPosition = 1;
+            for (i in 0..size + 1) {
+                handleCusView(viewUrls, i)
             }
-            var url: String;
-            if (i == 0) {
-                url = imgUrls.get(size - 1)
 
-            } else if (i == size + 1) {
-                url = imgUrls.get(0)
-            } else {
-                url = imgUrls.get(i - 1);
+        } else {
+            lastPosition = 0;
+            for (i in 0 until size) {
+                handleCusView(viewUrls, i)
             }
-            mImgViews.add(imgeView)
-            mContext?.let { imageLoader!!.disPlayImage(it, imgeView, url) }
-
         }
         setAdapter();
         if (autoPlay) {
             startAuto();
+        }
+    }
+
+    private fun handleCusView(viewUrls: ArrayList<View>, i: Int) {
+        var view = viewUrls[i];
+        if (viewClick != null) {
+            view.setOnClickListener { viewClick!!.viewClick(i) }
+        }
+        mImgViews.add(view)
+        mContext?.let { viewLoader!!.disPlayView(it, view) }
+    }
+
+    fun setImageUrls(imgUrls: ArrayList<String>) {
+        mImgViews.clear();
+        size = imgUrls.size;
+        initCurrentItem()
+        createIndicatorImages();
+        setIndicatorLocation();
+        if (isLimitless) {
+            lastPosition = 1;
+            for (i in 0..size + 1) {
+                val imgeView = ImageView(mContext);
+                imgeView.scaleType = ImageView.ScaleType.CENTER_CROP;
+                if (viewClick != null) {
+                    imgeView.setOnClickListener { viewClick!!.viewClick(i) }
+                }
+                var url: String;
+                if (i == 0) {
+                    url = imgUrls.get(size - 1)
+
+                } else if (i == size + 1) {
+                    url = imgUrls.get(0)
+                } else {
+                    url = imgUrls.get(i - 1);
+                }
+                mImgViews.add(imgeView)
+                mContext?.let { imageLoader!!.disPlayImage(it, imgeView, url) }
+
+            }
+
+        } else {
+            lastPosition = 0;
+            for (i in 0..size - 1) {
+                val imgeView = ImageView(mContext);
+                imgeView.scaleType = ImageView.ScaleType.CENTER_CROP;
+                if (viewClick != null) {
+                    imgeView.setOnClickListener { viewClick!!.viewClick(i) }
+                }
+                var url: String;
+                url = imgUrls.get(i);
+                mImgViews.add(imgeView)
+                mContext?.let { imageLoader!!.disPlayImage(it, imgeView, url) }
+
+            }
+        }
+        setAdapter();
+        if (autoPlay) {
+            startAuto();
+        }
+    }
+
+    private fun initCurrentItem() {
+        if (size > 1) {
+            if (isLimitless) {
+                currentItem = 1
+            } else {
+                currentItem == 0
+            }
+        } else {
+            currentItem == 0;
         }
     }
 
@@ -231,7 +324,7 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
         myPageAdapter = MyPageAdapter(mImgViews);
         viewPager!!.adapter = myPageAdapter;
         viewPager!!.setCurrentItem(currentItem)
-
+        viewPager!!.setPageTransformer(true, transformer)
         //通过数据源的大小判断是否能滑动
         if (isScroll && size > 1) {
             viewPager!!.isAbleScroll = true;
@@ -306,21 +399,23 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
 
 
     override fun onPageScrollStateChanged(state: Int) {
-        when (state) {
-            0
-            -> if (currentItem == 0) {
-                viewPager!!.setCurrentItem(size, false)
-            } else if (currentItem == size + 1) {
-                viewPager!!.setCurrentItem(1, false)
-            }
-            1
-            -> if (currentItem == size + 1) {
-                viewPager!!.setCurrentItem(1, false)
-            } else if (currentItem == 0) {
-                viewPager!!.setCurrentItem(size, false)
-            }
-            2
-            -> {
+        if (isLimitless) {
+            when (state) {
+                0
+                -> if (currentItem == 0) {
+                    viewPager!!.setCurrentItem(size, false)
+                } else if (currentItem == size + 1) {
+                    viewPager!!.setCurrentItem(1, false)
+                }
+                1
+                -> if (currentItem == size + 1) {
+                    viewPager!!.setCurrentItem(1, false)
+                } else if (currentItem == 0) {
+                    viewPager!!.setCurrentItem(size, false)
+                }
+                2
+                -> {
+                }
             }
         }
     }
@@ -330,11 +425,20 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
     }
 
     override fun onPageSelected(position: Int) {
-        currentItem = position
-        //切换指示器
-        mIndicatorViews.get((lastPosition - 1 + size) % size).setImageResource(indicatorUnSelect)
-        mIndicatorViews.get((position - 1 + size) % size).setImageResource(indicatorSelect)
-        lastPosition = position
+        if (isLimitless) {
+            currentItem = position
+            //切换指示器
+            mIndicatorViews.get((lastPosition - 1 + size) % size).setImageResource(indicatorUnSelect)
+            mIndicatorViews.get((position - 1 + size) % size).setImageResource(indicatorSelect)
+            lastPosition = position
+        } else {
+            currentItem = position
+            //切换指示器
+            mIndicatorViews.get(lastPosition).setImageResource(indicatorUnSelect)
+            mIndicatorViews.get(position).setImageResource(indicatorSelect)
+            lastPosition = position
+        }
+
     }
 
     class MyPageAdapter : PagerAdapter {
@@ -364,8 +468,8 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
     }
 
     //item点击
-    public interface IImageClick {
-        fun imageClick(position: Int);
+    public interface IViewClick {
+        fun viewClick(position: Int);
     }
 
     //item图片加载
@@ -373,5 +477,8 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
         fun disPlayImage(context: Context, imageView: ImageView, url: String);
     }
 
-
+    //item图片加载
+    public interface IViewLoader {
+        fun disPlayView(context: Context, view: View);
+    }
 }

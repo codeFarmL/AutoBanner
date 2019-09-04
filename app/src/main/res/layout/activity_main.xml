@@ -9,6 +9,7 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
+            android:clipChildren="false"
             android:layout_height="match_parent"
             tools:context=".MainActivity">
 
@@ -18,12 +19,15 @@
                 android:layout_height="200dp"
                 app:banner_is_frameLayout="false"
                 app:banner_interval_time="2000"
-                app:banner_height="185dp"
-                app:banner_indicator_top="10dp"
+                app:banner_height="173dp"
+                android:clipChildren="false"
+                app:banner_indicator_top="11dp"
                 app:banner_indicator_width="5dp"
                 app:banner_indicator_height="5dp"
                 app:banner_indicator_select_bg="@drawable/bg_banner_select_indicator"
                 app:banner_indicator_unSelect_bg="@drawable/bg_banner_unselect_indicator"
+                app:banner_clipChildren="false"
+                app:banner_clipChildren_margin="40dp"
                 android:layout_marginBottom="10dp"
         />
 
