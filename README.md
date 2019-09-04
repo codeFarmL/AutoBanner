@@ -51,7 +51,7 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
 	
         新增属性  
 	
-	<attr name="banner_clipChildren" format="boolean"/>  //是否clipChildren
+        <attr name="banner_clipChildren" format="boolean"/>  //是否clipChildren
 	
         <attr name="banner_clipChildren_margin" format="dimension"/> //是否clipChildren_margin
 二：依赖导入：
