@@ -5,7 +5,7 @@
 
 
 ![image](https://github.com/codeFarmL/AutoBanner/blob/master/banner.jpg?raw=true)
-
+![image](https://github.com/codeFarmL/AutoBanner/blob/codeFarmL-patch-1/banner1.jpg?raw=true)
 
 
 AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。支持单图和多图，支持指示点的位置变化，包括和轮播图同等级也可以在轮播图的下面，在轮播图的左面，中间，右面，支持指示点设置背景，支持指示点设置上下左右margin，支持设置自动轮播的停留时间，支持设置自动轮播的scroll时间等等·。
