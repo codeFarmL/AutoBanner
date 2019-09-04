@@ -13,6 +13,7 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
 一： 自定义属性
 
 	1.0.1版本：
+	
         <attr name="banner_width" format="dimension"/> 轮播图的宽度
       
         <attr name="banner_height" format="dimension"/> 轮播图的高度
@@ -49,6 +50,7 @@ AutoBanner是一款支持自动轮播的banner，主要是kt + Rxjava编写。�
 	1.0.2版本： 新增clipChildren功能，可以自定义transformer及一屏显示多页面效果
 	
         新增属性  
+	
 	<attr name="banner_clipChildren" format="boolean"/>  //是否clipChildren
 	
         <attr name="banner_clipChildren_margin" format="dimension"/> //是否clipChildren_margin
