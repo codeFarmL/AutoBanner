@@ -45,6 +45,8 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
     var indicatorBottom: Int = 0; //如果是帧性排布，是轮播指示点的下边距
     var indicatorWidth: Int = 0;
     var indicatorHeight: Int = 0;
+    var indicatorWidthSelect: Int = 0;
+    var indicatorHeightSelect: Int = 0;
     var indicatorMarginStart: Int = 0;
     var indicatorMarginEnd: Int = 0;
     var indicatorSpace: Int = 0;
@@ -88,11 +90,24 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
             UIUtils.dip2px(mContext, 5f)
         );
         indicatorWidth =
-            typeArray.getDimensionPixelSize(R.styleable.AutoBanner_banner_indicator_width, UIUtils.dip2px(mContext, 5F))
+            typeArray.getDimensionPixelSize(
+                R.styleable.AutoBanner_banner_indicator_width,
+                UIUtils.dip2px(mContext, 5F)
+            )
         indicatorHeight = typeArray.getDimensionPixelSize(
             R.styleable.AutoBanner_banner_indicator_height,
             UIUtils.dip2px(mContext, 5F)
         )
+        indicatorWidthSelect =
+            typeArray.getDimensionPixelSize(
+                R.styleable.AutoBanner_banner_indicator_width_select,
+                UIUtils.dip2px(mContext, 5F)
+            )
+        indicatorHeightSelect = typeArray.getDimensionPixelSize(
+            R.styleable.AutoBanner_banner_indicator_height_select,
+            UIUtils.dip2px(mContext, 5F)
+        )
+
 
         indicatorMarginStart = typeArray.getDimensionPixelSize(
             R.styleable.AutoBanner_banner_indicator_start_margin,
@@ -296,7 +311,16 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
         if (size > 1) {
             for (i in 0..size - 1) {
                 val mIvIndicator = ImageView(mContext);
-                val mLayoutPara = LinearLayout.LayoutParams(indicatorWidth, indicatorHeight);
+                val mLayoutPara: LinearLayout.LayoutParams;
+                if (indicatorWidth != indicatorWidthSelect) {
+                    if (i == 0) {
+                        mLayoutPara = LinearLayout.LayoutParams(indicatorWidthSelect, indicatorHeightSelect);
+                    } else {
+                        mLayoutPara = LinearLayout.LayoutParams(indicatorWidth, indicatorHeight);
+                    }
+                } else {
+                    mLayoutPara = LinearLayout.LayoutParams(indicatorWidth, indicatorHeight);
+                }
                 if (i == 0) {
                     mLayoutPara.marginStart = indicatorMarginStart;
                     mLayoutPara.marginEnd = indicatorSpace;
@@ -431,13 +455,17 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
         if (isLimitless) {
             currentItem = position
             //切换指示器
+            setLayoutParams(mIndicatorViews.get((lastPosition - 1 + size) % size), false)
             mIndicatorViews.get((lastPosition - 1 + size) % size).setImageResource(indicatorUnSelect)
+            setLayoutParams(mIndicatorViews.get((position - 1 + size) % size), true)
             mIndicatorViews.get((position - 1 + size) % size).setImageResource(indicatorSelect)
             lastPosition = position
         } else {
             currentItem = position
             //切换指示器
+            setLayoutParams(mIndicatorViews.get(lastPosition), false)
             mIndicatorViews.get(lastPosition).setImageResource(indicatorUnSelect)
+            setLayoutParams(mIndicatorViews.get(position), true)
             mIndicatorViews.get(position).setImageResource(indicatorSelect)
             lastPosition = position
         }
@@ -445,6 +473,20 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
             pageSelected!!.onPageSelect(position)
         }
 
+    }
+
+    fun setLayoutParams(view: View, boolean: Boolean) {
+        if (indicatorWidth != indicatorWidthSelect) {
+            if (boolean) {
+                var layoutParams = view.layoutParams as LinearLayout.LayoutParams
+                layoutParams.width = indicatorWidthSelect;
+                view.layoutParams = layoutParams;
+            } else {
+                var layoutParams = view.layoutParams as LinearLayout.LayoutParams
+                layoutParams.width = indicatorWidth;
+                view.layoutParams = layoutParams;
+            }
+        }
     }
 
     class MyPageAdapter : PagerAdapter {

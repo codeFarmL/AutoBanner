@@ -5,6 +5,8 @@
         <attr name="banner_height" format="dimension"/>
         <attr name="banner_indicator_height" format="dimension"/>
         <attr name="banner_indicator_width" format="dimension"/>
+        <attr name="banner_indicator_height_select" format="dimension"/>
+        <attr name="banner_indicator_width_select" format="dimension"/>
         <attr name="banner_indicator_space" format="dimension"/>
         <attr name="banner_indicator_start_margin" format="dimension"/>
         <attr name="banner_indicator_end_margin" format="dimension"/>
