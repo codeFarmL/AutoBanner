@@ -13,7 +13,8 @@ import android.widget.LinearLayout
 import com.example.banner.AutoBanner
 import com.example.banner.AutoBannerConfig
 import com.example.banner.transformer.GalleryTransformer
-import java.util.ArrayList
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     var bannerLinear: AutoBanner? = null;
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val array = ArrayList<String>()
+        val ft = SimpleDateFormat("yyyy/MM/dd HH:mm:ss", Locale.CHINA)
+        var str = ft.format(1567680633000);
+        Log.e("aa", str);
         array.add("https://b-ssl.duitang.com/uploads/item/201505/01/20150501010111_2BrKP.jpeg")
         array.add("https://b-ssl.duitang.com/uploads/item/201412/02/20141202213236_NGdxu.jpeg")
         array.add("https://b-ssl.duitang.com/uploads/item/201410/29/20141029153633_GGTV3.jpeg")
@@ -52,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         array1.add(view1)
         array1.add(view2)
         var num = 0;
-        bannerLinear!!.viewLoader = (object : AutoBanner.IViewLoader {
+       /* bannerLinear!!.viewLoader = (object : AutoBanner.IViewLoader {
             @SuppressLint("ResourceType")
             override fun disPlayView(context: Context, view: View) {
                 ;
@@ -66,7 +70,7 @@ class MainActivity : AppCompatActivity() {
                 //view.setBackgroundResource(R.color.)
             }
 
-        })
+        })*/
         bannerLinear!!.transformer = GalleryTransformer();
         bannerLinear!!.autoPlay = false;
         bannerLinear!!.viewPager!!.setOffscreenPageLimit(3)

@@ -34,6 +34,7 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
     var isLimitless: Boolean = true; //是否是无界限的
     var imageLoader: IImageLoader? = null;
     var viewLoader: IViewLoader? = null
+    var pageSelected: IPageSelected? = null
     var viewClick: IViewClick? = null;
     var size: Int = 0;
     var currentItem: Int = 0;
@@ -221,7 +222,9 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
             view.setOnClickListener { viewClick!!.viewClick(i) }
         }
         mImgViews.add(view)
-        mContext?.let { viewLoader!!.disPlayView(it, view) }
+        if (viewLoader != null) {
+            mContext?.let { viewLoader!!.disPlayView(it, view, i) }
+        }
     }
 
     fun setImageUrls(imgUrls: ArrayList<String>) {
@@ -438,6 +441,9 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
             mIndicatorViews.get(position).setImageResource(indicatorSelect)
             lastPosition = position
         }
+        if (pageSelected != null) {
+            pageSelected!!.onPageSelect(position)
+        }
 
     }
 
@@ -479,6 +485,10 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
 
     //item图片加载
     public interface IViewLoader {
-        fun disPlayView(context: Context, view: View);
+        fun disPlayView(context: Context, view: View, position: Int);
+    }
+
+    public interface IPageSelected {
+        fun onPageSelect(position: Int);
     }
 }
