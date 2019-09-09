@@ -480,10 +480,12 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
             if (boolean) {
                 var layoutParams = view.layoutParams as LinearLayout.LayoutParams
                 layoutParams.width = indicatorWidthSelect;
+                layoutParams.height = indicatorHeightSelect;
                 view.layoutParams = layoutParams;
             } else {
                 var layoutParams = view.layoutParams as LinearLayout.LayoutParams
                 layoutParams.width = indicatorWidth;
+                layoutParams.height = indicatorHeight;
                 view.layoutParams = layoutParams;
             }
         }
