@@ -19,7 +19,7 @@
                 android:layout_height="200dp"
                 app:banner_is_frameLayout="false"
                 app:banner_interval_time="2000"
-                app:banner_height="173dp"
+                app:banner_height="183dp"
                 android:clipChildren="false"
                 app:banner_indicator_top="11dp"
                 app:banner_indicator_width="4dp"
@@ -30,8 +30,13 @@
                 app:banner_indicator_unSelect_bg="@drawable/bg_banner_unselect_indicator"
                 app:banner_clipChildren="false"
                 app:banner_clipChildren_margin="40dp"
-                android:layout_marginBottom="10dp"
         />
+
+        <Button
+                android:id="@+id/btn"
+                android:text="添加"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         <com.example.banner.AutoBanner
                 android:id="@+id/bannerFrame"

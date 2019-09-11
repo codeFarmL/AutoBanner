@@ -193,7 +193,7 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
 
     //设置轮播指示点的位置（线性布局和帧布局的切换）
     fun setIndicatorLocation() {
-        if (mIndicatorViews.size > 0) {
+        if (mIndicatorViews.size >= 0) {
             if (!bannerIsFrameLayout) {
                 val mVpLayoutParas = viewPager!!.layoutParams as LayoutParams;
                 mVpLayoutParas.height = viewPagerHeight;
@@ -355,6 +355,7 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
         //通过数据源的大小判断是否能滑动
         if (isScroll && size > 1) {
             viewPager!!.isAbleScroll = true;
+            mLLIndicator!!.visibility = View.VISIBLE;
         } else {
             viewPager!!.isAbleScroll = false;
             mLLIndicator!!.visibility = View.GONE;
