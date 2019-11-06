@@ -333,7 +333,9 @@ class AutoBanner : FrameLayout, ViewPager.OnPageChangeListener {
                 }
                 mLayoutPara.topMargin = indicatorTop;
                 mLayoutPara.bottomMargin = indicatorBottom;
+                mLayoutPara.gravity = Gravity.CENTER_VERTICAL
                 mIvIndicator.layoutParams = mLayoutPara;
+
                 if (i == 0) {
                     mIvIndicator.setImageResource(indicatorSelect)
                 } else {
